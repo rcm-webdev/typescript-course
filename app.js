@@ -5,6 +5,7 @@ const menu = [
 ];
 
 const cashInRegister = 100;
+const nextOrderId = 1;
 const orderQueue = [];
 
 //add new pizza utility function
@@ -19,7 +20,15 @@ const addNewPizza = (pizzaObj) => {
 const placeOrder = (order) => {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === order);
   cashInRegister += selectedPizza.price;
-  const newOrder = { pizza: selectedPizza, status: "ordered" };
+  const newOrder = {
+    id: nextOrderId++,
+    pizza: selectedPizza,
+    status: "ordered",
+  };
   orderQueue.push(newOrder);
   return newOrder;
 };
+
+//create a complete order function
+
+const completeOrder = (orderId) => {};
