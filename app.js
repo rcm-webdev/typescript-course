@@ -31,4 +31,8 @@ const placeOrder = (order) => {
 
 //create a complete order function
 
-const completeOrder = (orderId) => {};
+const completeOrder = (orderId) => {
+  const order = orderQueue.find((order) => order.id === orderId);
+  order.status = "completed";
+  return order;
+};
