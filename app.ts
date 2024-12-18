@@ -1,3 +1,8 @@
+type Pizza = {
+  name: string;
+  price: number;
+};
+
 const menu = [
   { name: "Cheese", price: 2.5 },
   { name: "Pepperoni", price: 3.0 },
@@ -6,10 +11,10 @@ const menu = [
 
 let cashInRegister = 100;
 let nextOrderId = 1;
-const orderQueue = [];
+let orderQueue = [];
 
 //add new pizza utility function
-const addNewPizza = (pizzaObj) => {
+const addNewPizza = (pizzaObj: Pizza) => {
   menu.push(pizzaObj);
 };
 
@@ -19,6 +24,10 @@ const addNewPizza = (pizzaObj) => {
 
 const placeOrder = (order) => {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === order);
+  if (!selectedPizza) {
+    console.error(`${order} does not exist in the menu`);
+    return;
+  }
   cashInRegister += selectedPizza.price;
   const newOrder = {
     id: nextOrderId++,
@@ -31,8 +40,12 @@ const placeOrder = (order) => {
 
 //create a complete order function
 
-const completeOrder = (orderId) => {
+const completeOrder = (orderId: number) => {
   const order = orderQueue.find((order) => order.id === orderId);
+  if (!order) {
+    console.error(`${order} is not valid`);
+    return;
+  }
   order.status = "completed";
   return order;
 };
@@ -42,7 +55,7 @@ addNewPizza({ name: "BBQ Chicken", cost: 12 });
 addNewPizza({ name: "Spicy Sausage", cost: 11 });
 
 placeOrder("Chicken Bacon Ranch");
-completeOrder("1");
+completeOrder(1);
 
 console.log("Menu:", menu);
 console.log("Cash in register:", cashInRegister);
