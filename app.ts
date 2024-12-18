@@ -3,6 +3,12 @@ type Pizza = {
   price: number;
 };
 
+type Order = {
+  id: number;
+  pizza: Pizza;
+  status: string;
+};
+
 const menu = [
   { name: "Cheese", price: 2.5 },
   { name: "Pepperoni", price: 3.0 },
@@ -11,7 +17,7 @@ const menu = [
 
 let cashInRegister = 100;
 let nextOrderId = 1;
-let orderQueue = [];
+let orderQueue: Order[] = [];
 
 //add new pizza utility function
 const addNewPizza = (pizzaObj: Pizza) => {
@@ -22,7 +28,7 @@ const addNewPizza = (pizzaObj: Pizza) => {
 //updates income in cashInRegister
 //adds pizza order to the order queue
 
-const placeOrder = (order) => {
+const placeOrder = (order: string) => {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === order);
   if (!selectedPizza) {
     console.error(`${order} does not exist in the menu`);
@@ -50,9 +56,9 @@ const completeOrder = (orderId: number) => {
   return order;
 };
 
-addNewPizza({ name: "Chicken Bacon Ranch", cost: 12 });
-addNewPizza({ name: "BBQ Chicken", cost: 12 });
-addNewPizza({ name: "Spicy Sausage", cost: 11 });
+addNewPizza({ name: "Chicken Bacon Ranch", price: 12 });
+addNewPizza({ name: "BBQ Chicken", price: 12 });
+addNewPizza({ name: "Spicy Sausage", price: 11 });
 
 placeOrder("Chicken Bacon Ranch");
 completeOrder(1);
