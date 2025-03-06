@@ -49,7 +49,7 @@ const placeOrder = (order: string) => {
 const completeOrder = (orderId: number) => {
   const order = orderQueue.find((order) => order.id === orderId);
   if (!order) {
-    console.error(`${order} is not valid`);
+    console.error(`${orderId} was not found in the orderQueue`);
     return;
   }
   order.status = "completed";
